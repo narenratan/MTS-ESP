@@ -1,0 +1,49 @@
+name: TestProgramBuilds
+run-name: TestProgramBuilds
+on: [push]
+jobs:
+  build_linux:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Tests
+        run: |
+            cd Tests/TestClient
+            cmake -B build
+            cmake --build build
+            ./build/TestClient
+            cd ../TestMaster
+            cmake -B build
+            cmake --build build
+            ./build/TestMaster
+  build_mac:
+    runs-on: macos-14
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Tests
+        run: |
+            cd Tests/TestClient
+            cmake -B build
+            cmake --build build
+            ./build/TestClient
+            cd ../TestMaster
+            cmake -B build
+            cmake --build build
+            ./build/TestMaster
+  build_windows:
+    runs-on: windows-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Tests
+        run: |
+            cd Tests/TestClient
+            cmake -B build
+            cmake --build build
+            ./build/Debug/TestClient.exe
+            cd ../TestMaster
+            cmake -B build
+            cmake --build build
+            ./build/Debug/TestMaster.exe
